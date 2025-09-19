@@ -1,0 +1,4 @@
+APP:
+  MODEL:
+    NSL-KDD:
+      MODEL_PATH: "models/NSL_KDD/random_forest_model.pkl"
