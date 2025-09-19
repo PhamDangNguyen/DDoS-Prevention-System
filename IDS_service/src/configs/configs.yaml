@@ -2,3 +2,5 @@ APP:
   MODEL:
     NSL-KDD:
       MODEL_PATH: "models/NSL_KDD/random_forest_model.pkl"
+    CIC-IDS2017:
+      MODEL_PATH: "models/CIC_IDS_2017/rf_pipeline.joblib"
