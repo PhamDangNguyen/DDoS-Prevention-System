@@ -5,3 +5,5 @@ numpy==2.2.6
 scikit-learn==1.7.2
 joblib==1.5.2
 imblearn==0.0
+uvicorn==0.35.0
+fastapi==0.116.2
