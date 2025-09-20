@@ -1,4 +1,6 @@
-.vscode
-Research/data
-Research/Output_model
+/.vscode/
+/Research/data/
+/Research/Output_model/
+/IDS_service/models/
 IDS_service/models
+Research/Output_model
