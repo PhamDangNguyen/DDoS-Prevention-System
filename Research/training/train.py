@@ -76,7 +76,11 @@ class Trainer:
             pickle.dump({'preprocessor': self.preprocessor, 'model': self.model, "label_encoder": self.label_encoder}, f)
 
     def train(self):
+        self.load_dataset()
         # Train test split
+        clm = ['protocol_type', 'service', 'flag', 'attack']
+        for x in clm:
+            self.df_train[x] = self.label_encoder.fit_transform(self.df_train[x])
         X = self.df_train.drop(["attack"], axis=1)
         y = self.df_train["attack"]
         X_train, X_test, y_train, y_test = train_test_split(X, y,test_size=0.2,random_state=43)
