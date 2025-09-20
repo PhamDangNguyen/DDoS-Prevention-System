@@ -1,0 +1,15 @@
+
+services:
+  ids_service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ids_service
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    working_dir: /app
+    command: ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8080"]
+    volumes:
+      - .:/app
+
