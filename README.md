@@ -1,19 +1,19 @@
 # DDoS-Prevention-System
-This system is a Machine Learning–based Intrusion Detection and Prevention System (IDPS) trained to classify network traffic into three categories:
-- **DDoS Attacks** – malicious traffic aiming to overwhelm and disrupt network services.  
-- **Unauthorized Access** – attempts to gain access to systems or resources without permission.  
-- **Normal Traffic** – legitimate, benign network activities.  
 
-The models are trained and evaluated using two widely recognized benchmark datasets:  
-- **NSL-KDD** – [a refined version](https://www.unb.ca/cic/datasets/nsl.html) of the KDD’99 dataset, widely used for intrusion detection research.  
-  It is particularly employed for evaluating intrusion detection systems in **Internet of Things (IoT) environments**, where lightweight and efficient security solutions are essential.  
+Hệ thống này là một **Hệ thống Phát hiện và Ngăn chặn Xâm nhập (IDPS)** dựa trên **Machine Learning**, được huấn luyện để phân loại lưu lượng mạng thành ba nhóm chính:
+- **Tấn công DDoS (DDos)** – lưu lượng độc hại với mục đích làm tê liệt và gián đoạn dịch vụ mạng.  
+- **Truy cập trái phép(Unauthorized Access)** – các hành vi cố gắng xâm nhập hệ thống hoặc tài nguyên khi chưa được cấp quyền.  
+- **Lưu lượng bình thường (Normal)** – hoạt động mạng hợp lệ, an toàn và không gây hại.  
 
-- **CIC-IDS2017** – [a modern dataset](https://www.unb.ca/cic/datasets/ids-2017.html) created by the **Canadian Institute for Cybersecurity, University of New Brunswick (Canada)**.  
-  Its primary objective is to simulate **enterprise/organizational network environments**, containing realistic benign and malicious traffic across diverse attack scenarios.
+Các mô hình được huấn luyện và đánh giá trên hai bộ dữ liệu chuẩn nổi tiếng:  
+- **NSL-KDD** – [phiên bản cải tiến](https://www.unb.ca/cic/datasets/nsl.html) của bộ dữ liệu KDD’99, thường được sử dụng trong nghiên cứu phát hiện xâm nhập.  
+  Đặc biệt, bộ dữ liệu này thường được áp dụng để đánh giá hiệu quả của các hệ thống phát hiện xâm nhập trong **môi trường Internet of Things (IoT)**, nơi cần những giải pháp bảo mật gọn nhẹ và hiệu quả.  
 
-# Repository Instructions
+- **CIC-IDS2017** – [bộ dữ liệu hiện đại](https://www.unb.ca/cic/datasets/ids-2017.html) do **Canadian Institute for Cybersecurity, Đại học New Brunswick (Canada)** xây dựng.  
+  Mục tiêu chính là mô phỏng **môi trường mạng doanh nghiệp/tổ chức**, bao gồm cả lưu lượng hợp lệ và các kịch bản tấn công đa dạng, sát với thực tế.  
 
-This repository is divided into three related parts, as illustrated in the diagram and explained below:
+# Hướng dẫn Repository
+Repository này được chia thành ba phần chính, minh họa trong sơ đồ dưới đây và giải thích chi tiết phía sau:
 ```
 DDoS-Prevention-System
         |__ Document
@@ -38,15 +38,19 @@ DDoS-Prevention-System
             |__ . . .
         
 ```
-## Doccument
-This is a repo that place for document, you can reach the paper we reserach or document, some feature about system, please click [here](Document) to accsset to it. 
-## IDS service
-The IDS_system is the central service of our project.  
-Developed with FastAPI, it is responsible for detecting malicious requests.  
-Click [IDS_system](IDS_service) to explore it.
-## Research
-The **research** directory is organized into several submodules, including *crawl_data*, *training*, *inference*, and *preprocessing*.  
-Together, these submodules represent the end-to-end research process: collecting and cleaning data, testing various models, selecting features, and training pipeline.  
-This folder acts as a comprehensive record of our experiments and design choices throughout the project.  
 
-For the deployed implementation, click [Research](Research) to access the main service.
+## Document
+Thư mục **Document** lưu trữ các tài liệu liên quan, bao gồm bài nghiên cứu về các mẫu data, tài liệu thiết kế hệ thống.  
+Bạn có thể truy cập trực tiếp tại [Document](Document).  
+
+## IDS service
+**IDS_system** là dịch vụ trung tâm của dự án.  
+Được phát triển bằng **FastAPI**, thành phần này chịu trách nhiệm phát hiện và xử lý các yêu cầu độc hại.  
+Nhấn vào [IDS_system](IDS_service) để khám phá chi tiết.  
+
+## Research
+Thư mục **Research** được tổ chức thành nhiều tiểu mục, bao gồm *crawl_data*, *training*, *inference* và *preprocessing*.  
+Các tiểu mục này tạo thành quy trình nghiên cứu toàn diện: từ thu thập và làm sạch dữ liệu, thử nghiệm nhiều mô hình khác nhau, lựa chọn đặc trưng, cho tới xây dựng pipeline huấn luyện.  
+
+Đây là nơi lưu giữ toàn bộ kết quả thí nghiệm, quyết định thiết kế và các bước tiến hành trong quá trình nghiên cứu.  
+Để xem bản triển khai, nhấn vào [Research](Research).  
