@@ -85,8 +85,10 @@ class AnomalyService(IAnomalyService):
 		if self.data_name == "NSL-KDD":
 			data_transformed = self.preprocess(input_request)
 			pred = self.model.predict(data_transformed)
+			pred_probs = self.model.predict_proba(data_transformed)[:,pred[0]]
 			pred = self.label_encoder.inverse_transform(pred)
-			return pred[0]
+			
+			return pred[0], pred_probs
 		elif self.data_name == "CIC-IDS2017":
 			def predict_one(pipe, point: dict) -> dict:
 				df_one = pd.DataFrame([point]).select_dtypes(include=["number"])
