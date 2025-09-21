@@ -11,7 +11,12 @@ Nó cung cấp 2 endpoints:
 - [Docker](https://docs.docker.com/get-docker/) installed  
 - [Docker Compose](https://docs.docker.com/compose/install/) installed  
 - Python 3.10+ (for local testing scripts)  
-
+- Download model từ Google driver theo [link](https://drive.google.com/drive/folders/1OgVOAnj52M3MJOGkwx9kn883yW4EXKET?usp=sharing) và đặt vào trong thư mục IDS_service
+```
+|__ IDS_service    
+|    |__ models
+|       | . . .
+```
 ---
 
 ## Chạy Service
@@ -38,6 +43,7 @@ Sau khi service lên rồi bạn có thể test service sử dụng Python scrip
 ```bash
 cd IDS_service/test
 conda create --name ddos python=3.10
+conda activate ddos
 pip install -r requirements.txt
 ```
 ### B2. Test service bằng python file
