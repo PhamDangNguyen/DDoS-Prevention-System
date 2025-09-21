@@ -11,10 +11,11 @@ router = APIRouter()
 def check_anomaly(input_request:InputRequestNSLKDD):
     try:
         anomalyService = AnomalyService(data_name="NSL-KDD")
-        pred = anomalyService.infer(input_request)
+        pred, pred_probs = anomalyService.infer(input_request)
         result = {
             "status_code": 200,
-            "result": pred
+            "result": pred,
+            "confidence": pred_probs
         }
         return Response(**result)
     except Exception as e:
