@@ -1,6 +1,6 @@
 from src.services.abstract import IAnomalyService
 import pickle
-from src.services.dto import InputRequestNSLKDD, InputRequestCICIDS2017
+from src.services.dto import InputRequestNSLKDD, InputRequestCICIDS2017, SelectedFeaturetCICIDS2017
 from src.configs import APP_CONFIGS
 import numpy as np
 import joblib
@@ -27,7 +27,7 @@ class AnomalyService(IAnomalyService):
 			model_path = APP_CONFIGS["APP"]["MODEL"]["CIC-IDS2017"]["MODEL_PATH"]
 			self.model = joblib.load(model_path)
 
-	def preprocess(self, input_request: Union[InputRequestNSLKDD, InputRequestCICIDS2017]):
+	def preprocess(self, input_request: Union[InputRequestNSLKDD, SelectedFeaturetCICIDS2017]):
 		if self.data_name == "NSL-KDD":
 			FEATURE_ORDER = [
 				"duration", "protocol_type", "service", "flag", "src_bytes", "dst_bytes",
@@ -42,46 +42,46 @@ class AnomalyService(IAnomalyService):
 			return data_transformed
 		elif self.data_name == "CIC-IDS2017":
 			COL2FIELD = {
-				"PSH Flag Count": "psh_flag_count",
-				"min_seg_size_forward": "min_seg_size_forward",
+				"PSH Flag Count": "psh_flag_cnt",
+				"min_seg_size_forward": "fwd_seg_size_min",
 				"Flow IAT Max": "flow_iat_max",
 				"Flow IAT Min": "flow_iat_min",
-				"ACK Flag Count": "ack_flag_count",
-				"Destination Port": "destination_port",
-				"Bwd Packet Length Mean": "bwd_packet_length_mean",
-				"Bwd Packet Length Max": "bwd_packet_length_max",
-				"Bwd Packet Length Min": "bwd_packet_length_min",
-				"Init_Win_bytes_forward": "init_win_bytes_forward",
+				"ACK Flag Count": "ack_flag_cnt",
+				"Destination Port": "dst_port",
+				"Bwd Packet Length Mean": "bwd_pkt_len_mean",
+				"Bwd Packet Length Max": "bwd_pkt_len_max",
+				"Bwd Packet Length Min": "bwd_pkt_len_min",
+				"Init_Win_bytes_forward": "init_fwd_win_byts",
 				"Fwd IAT Max": "fwd_iat_max",
 				"Idle Mean": "idle_mean",
 				"Idle Max": "idle_max",
-				"Avg Bwd Segment Size": "avg_bwd_segment_size",
-				"Bwd Packet Length Std": "bwd_packet_length_std",
+				"Avg Bwd Segment Size": "bwd_seg_size_avg",
+				"Bwd Packet Length Std": "bwd_pkt_len_std",
 				"Bwd IAT Mean": "bwd_iat_mean",
 				"Fwd IAT Std": "fwd_iat_std",
 				"Down/Up Ratio": "down_up_ratio",
-				"Max Packet Length": "max_packet_length",
-				"Average Packet Size": "average_packet_size",
-				"Min Packet Length": "min_packet_length",
-				"Packet Length Std": "packet_length_std",
-				"Fwd Packets/s": "fwd_packets_s",
-				"Packet Length Mean": "packet_length_mean",
+				"Max Packet Length": "pkt_len_max",
+				"Average Packet Size": "pkt_size_avg",
+				"Min Packet Length": "pkt_len_min",
+				"Packet Length Std": "pkt_len_std",
+				"Fwd Packets/s": "fwd_pkts_s",
+				"Packet Length Mean": "pkt_len_mean",
 				"Flow IAT Std": "flow_iat_std",
-				"URG Flag Count": "urg_flag_count",
-				"FIN Flag Count": "fin_flag_count",
-				"Fwd Packet Length Min": "fwd_packet_length_min",
-				"Subflow Fwd Packets": "subflow_fwd_packets",
+				"URG Flag Count": "urg_flag_cnt",
+				"FIN Flag Count": "fin_flag_cnt",
+				"Fwd Packet Length Min": "fwd_pkt_len_min",
+				"Subflow Fwd Packets": "subflow_fwd_pkts",
 				"Bwd IAT Max": "bwd_iat_max",
-				"Packet Length Variance": "packet_length_variance",
+				"Packet Length Variance": "pkt_len_var",
 				"Fwd IAT Mean": "fwd_iat_mean",
 				"Flow Duration": "flow_duration",
-				"Fwd IAT Total": "fwd_iat_total",
+				"Fwd IAT Total": "fwd_iat_tot",
 				"Bwd IAT Std": "bwd_iat_std",
 				"Flow IAT Mean": "flow_iat_mean",
 			}
 			cols_dict = {col: getattr(input_request, field) for col, field in COL2FIELD.items()}
 			return cols_dict
-	def infer(self, input_request: Union[InputRequestNSLKDD, InputRequestCICIDS2017]):
+	def infer(self, input_request: Union[InputRequestNSLKDD, SelectedFeaturetCICIDS2017]):
 		if self.data_name == "NSL-KDD":
 			data_transformed = self.preprocess(input_request)
 			pred = self.model.predict(data_transformed)
@@ -133,44 +133,44 @@ if __name__ == "__main__":
 	
 	anomaly_service = AnomalyService("CIC-IDS2017")
 	COL2FIELD = {
-		"PSH Flag Count": "psh_flag_count",
-		"min_seg_size_forward": "min_seg_size_forward",
-		"Flow IAT Max": "flow_iat_max",
-		"Flow IAT Min": "flow_iat_min",
-		"ACK Flag Count": "ack_flag_count",
-		"Destination Port": "destination_port",
-		"Bwd Packet Length Mean": "bwd_packet_length_mean",
-		"Bwd Packet Length Max": "bwd_packet_length_max",
-		"Bwd Packet Length Min": "bwd_packet_length_min",
-		"Init_Win_bytes_forward": "init_win_bytes_forward",
-		"Fwd IAT Max": "fwd_iat_max",
-		"Idle Mean": "idle_mean",
-		"Idle Max": "idle_max",
-		"Avg Bwd Segment Size": "avg_bwd_segment_size",
-		"Bwd Packet Length Std": "bwd_packet_length_std",
-		"Bwd IAT Mean": "bwd_iat_mean",
-		"Fwd IAT Std": "fwd_iat_std",
-		"Down/Up Ratio": "down_up_ratio",
-		"Max Packet Length": "max_packet_length",
-		"Average Packet Size": "average_packet_size",
-		"Min Packet Length": "min_packet_length",
-		"Packet Length Std": "packet_length_std",
-		"Fwd Packets/s": "fwd_packets_s",
-		"Packet Length Mean": "packet_length_mean",
-		"Flow IAT Std": "flow_iat_std",
-		"URG Flag Count": "urg_flag_count",
-		"FIN Flag Count": "fin_flag_count",
-		"Fwd Packet Length Min": "fwd_packet_length_min",
-		"Subflow Fwd Packets": "subflow_fwd_packets",
-		"Bwd IAT Max": "bwd_iat_max",
-		"Packet Length Variance": "packet_length_variance",
-		"Fwd IAT Mean": "fwd_iat_mean",
-		"Flow Duration": "flow_duration",
-		"Fwd IAT Total": "fwd_iat_total",
-		"Bwd IAT Std": "bwd_iat_std",
-		"Flow IAT Mean": "flow_iat_mean",
-	}
-	input_request = InputRequestCICIDS2017(
+				"PSH Flag Count": "psh_flag_cnt",
+				"min_seg_size_forward": "fwd_seg_size_min",
+				"Flow IAT Max": "flow_iat_max",
+				"Flow IAT Min": "flow_iat_min",
+				"ACK Flag Count": "ack_flag_cnt",
+				"Destination Port": "dst_port",
+				"Bwd Packet Length Mean": "bwd_pkt_len_mean",
+				"Bwd Packet Length Max": "bwd_pkt_len_max",
+				"Bwd Packet Length Min": "bwd_pkt_len_min",
+				"Init_Win_bytes_forward": "init_fwd_win_byts",
+				"Fwd IAT Max": "fwd_iat_max",
+				"Idle Mean": "idle_mean",
+				"Idle Max": "idle_max",
+				"Avg Bwd Segment Size": "bwd_seg_size_avg",
+				"Bwd Packet Length Std": "bwd_pkt_len_std",
+				"Bwd IAT Mean": "bwd_iat_mean",
+				"Fwd IAT Std": "fwd_iat_std",
+				"Down/Up Ratio": "down_up_ratio",
+				"Max Packet Length": "pkt_len_max",
+				"Average Packet Size": "pkt_size_avg",
+				"Min Packet Length": "pkt_len_min",
+				"Packet Length Std": "pkt_len_std",
+				"Fwd Packets/s": "fwd_pkts_s",
+				"Packet Length Mean": "pkt_len_mean",
+				"Flow IAT Std": "flow_iat_std",
+				"URG Flag Count": "urg_flag_cnt",
+				"FIN Flag Count": "fin_flag_cnt",
+				"Fwd Packet Length Min": "fwd_pkt_len_min",
+				"Subflow Fwd Packets": "subflow_fwd_pkts",
+				"Bwd IAT Max": "bwd_iat_max",
+				"Packet Length Variance": "pkt_len_var",
+				"Fwd IAT Mean": "fwd_iat_mean",
+				"Flow Duration": "flow_duration",
+				"Fwd IAT Total": "fwd_iat_tot",
+				"Bwd IAT Std": "bwd_iat_std",
+				"Flow IAT Mean": "flow_iat_mean",
+			}
+	input_request = SelectedFeaturetCICIDS2017(
 		psh_flag_count=0,
 		min_seg_size_forward=0,
 		flow_iat_max=0,

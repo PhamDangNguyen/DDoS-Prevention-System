@@ -37,7 +37,7 @@ URL có sẵn để sử dụng sau khi run docker:
 * **CIC-IDS2017 URL**: http://127.0.0.1:8080/CIC-IDS2017
 * **NSL-KDD URL**: http://127.0.0.1:8080/NSL-KDD
 
-## Testing the Service
+## Testing the Service using script
 Sau khi service lên rồi bạn có thể test service sử dụng Python scripts sau:
 ### B1.Tạo môi trường test bằng conda
 ```bash
@@ -51,4 +51,19 @@ pip install -r requirements.txt
 cd /test
 python CIC_IDS2017.py
 python NSL_KDD.py
+```
+
+## Testing the Service using cicflowmeter
+Để sử dụng tool cicflowmeter, ta có thể thực hiện như sau
+### B1.Tạo môi trường test bằng conda
+```bash
+cd IDS_service/test
+conda create --name ddos python=3.10
+conda activate ddos
+pip install cicflowmeter
+```
+### B2. Chạy tool cicflowmeter
+```bash
+ifconfig # Lấy tên một interface muốn theo dõi
+sudo cicflowmeter -i {interface_name} -c flow.csv -u http://localhost:8080/CIC-IDS2017
 ```
