@@ -60,14 +60,18 @@ python NSL_KDD.py
 cd IDS_service/test
 conda create --name ddos python=3.12
 conda activate ddos
-pip install cicflowmeter
+pip install cicflowmeter==0.6.1
+pip install scapy==2.4.3
+pip install numpy==1.26.4
 ```
-### B2. Chạy tool cicflowmeter
+
+### B2: Sửa một file môi trường
+Copy các file flow_session.py, flow.py, sniffer.py vào anaconda3/envs/ddos/lib/python3.10/site-packages/cicflowmeter/
+### B3. Chạy tool cicflowmeter
 ```bash
 ifconfig # Lấy tên một interface muốn theo dõi
-sudo cicflowmeter -i {interface_name} -c flow.csv -u http://localhost:8080/CIC-IDS2017
+sudo cicflowmeter -i {interface_name} -u http://localhost:8080/CIC-IDS2017
 ```
 ## Testing the Service using cicflowmeter (Window)
 B1: Cài [Wireshark](https://www.wireshark.org/download.html).  
-B2: Add Wireshark vào environment variable PATH.  
-B4: Cài Cicflowmeter ```pip install cicflowmeter```
+B2: Add Wireshark vào environment variable PATH.
