@@ -53,12 +53,12 @@ python CIC_IDS2017.py
 python NSL_KDD.py
 ```
 
-## Testing the Service using cicflowmeter
+## Testing the Service using cicflowmeter (Ubuntu)
 Để sử dụng tool cicflowmeter, ta có thể thực hiện như sau
 ### B1.Tạo môi trường test bằng conda
 ```bash
 cd IDS_service/test
-conda create --name ddos python=3.10
+conda create --name ddos python=3.12
 conda activate ddos
 pip install cicflowmeter
 ```
@@ -67,3 +67,7 @@ pip install cicflowmeter
 ifconfig # Lấy tên một interface muốn theo dõi
 sudo cicflowmeter -i {interface_name} -c flow.csv -u http://localhost:8080/CIC-IDS2017
 ```
+## Testing the Service using cicflowmeter (Window)
+B1: Cài [Wireshark](https://www.wireshark.org/download.html).  
+B2: Add Wireshark vào environment variable PATH.  
+B4: Cài Cicflowmeter ```pip install cicflowmeter```

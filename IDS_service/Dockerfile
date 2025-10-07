@@ -14,7 +14,7 @@ RUN apt-get update \
 
 # Copy requirements from repo root and install
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN pip install --default-timeout=1000 -r requirements.txt
 
 EXPOSE 8080
 
