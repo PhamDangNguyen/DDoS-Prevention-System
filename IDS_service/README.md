@@ -58,9 +58,9 @@ python NSL_KDD.py
 ### B1.Tạo môi trường test bằng conda
 ```bash
 cd IDS_service/test
-conda create --name ddos python=3.12
+conda create --name ddos python=3.10
 conda activate ddos
-pip install cicflowmeter==0.6.1
+pip install cicflowmeter==0.1.6
 pip install scapy==2.4.3
 pip install numpy==1.26.4
 ```
@@ -74,4 +74,5 @@ sudo cicflowmeter -i {interface_name} -u http://localhost:8080/CIC-IDS2017
 ```
 ## Testing the Service using cicflowmeter (Window)
 B1: Cài [Wireshark](https://www.wireshark.org/download.html).  
-B2: Add Wireshark vào environment variable PATH.
+B2: Add Wireshark vào environment variable PATH.  
+Ex: "cicflowmeter -i "Wi-Fi" -c flow.csv -u http://localhost:8080/CIC-IDS2017"
