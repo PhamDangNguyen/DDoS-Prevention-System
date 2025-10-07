@@ -74,5 +74,4 @@ sudo cicflowmeter -i {interface_name} -u http://localhost:8080/CIC-IDS2017
 ```
 ## Testing the Service using cicflowmeter (Window)
 B1: Cài [Wireshark](https://www.wireshark.org/download.html).  
-B2: Add Wireshark vào environment variable PATH.  
-B4: Cài Cicflowmeter ```pip install cicflowmeter```
+B2: Add Wireshark vào environment variable PATH.
