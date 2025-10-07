@@ -1,4 +1,4 @@
-# Sơ đồ chung của IDS system
+# Kiến trúc chung của IDS system
 ```text
 ┌────────────────────────┐
 │ 1️⃣ Packet Capture      │   ← scapy / cicflowmeter

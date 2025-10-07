@@ -7,5 +7,5 @@ joblib==1.5.2
 imblearn==0.0
 uvicorn==0.35.0
 fastapi==0.116.2
-cicflowmeter
+cicflowmeter==0.1.6
 requests==2.32.5

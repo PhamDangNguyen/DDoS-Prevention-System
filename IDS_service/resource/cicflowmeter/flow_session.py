@@ -18,11 +18,11 @@ class FlowSession(DefaultSession):
 
     def __init__(self, *args, **kwargs):
         self.flows = {}
-        # self.csv_line = 0
+        self.csv_line = 0
 
-        #if self.output_mode == "flow":
-         #   output = open(self.output_file, "w")
-          #  self.csv_writer = csv.writer(output)
+        if self.output_mode == "flow":
+            output = open(self.output_file, "w")
+            self.csv_writer = csv.writer(output)
 
         self.packets_count = 0
 
@@ -41,11 +41,11 @@ class FlowSession(DefaultSession):
         direction = PacketDirection.FORWARD
         
         
-        # if self.output_mode != "flow":
-        #     if "TCP" not in packet:
-        #         return
-        #     elif "UDP" not in packet:
-        #         return
+        if self.output_mode != "flow":
+            if "TCP" not in packet:
+                return
+            elif "UDP" not in packet:
+                return
 
         try:
             # Creates a key variable to check
@@ -167,11 +167,11 @@ class FlowSession(DefaultSession):
                         )
                     )
 
-                # if self.csv_line == 0:
-                  #  self.csv_writer.writerow(data.keys())
+                if self.csv_line == 0:
+                    self.csv_writer.writerow(data.keys())
 
-                #self.csv_writer.writerow(data.values())
-                #self.csv_line += 1
+                self.csv_writer.writerow(data.values())
+                self.csv_line += 1
 
                 del self.flows[k]
         if not self.url_model:
