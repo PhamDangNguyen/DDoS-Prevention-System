@@ -11,3 +11,7 @@
     - Thêm Foder [Randomforest](Randomforest), đây là cơ sở lý thuyết để xây dựng model (bao gồm cả example thực hành).  
 **Updata 28/9/2025**
     - Thêm document về bảo mật trong IoT tại thưu mục [Thesis doc](Thesis%20doc)
+**Uppdate 07/10/2025**
+    - Thêm [IDSsystem_architecture.md](Service%20doc/IDSsystem_architecture.md) để nói vể cấu trúc hệ thống và vị trí của Random forest bên trong
+    - Thêm so sánh basic giữa Random forest và gaussian model tại phần 3 của [Google Docs](https://docs.google.com/document/d/1OPyAPPsMU2b6mwO4y2GdGHi8gcZuEuTAG4o5MKlF-A8/edit?tab=t.0#heading=h.u8pfoeadya6k)
+  
